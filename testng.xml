@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" verbose="0" name="MySuite1">
+
+    <listeners>
+      <listener class-name="org.andestech.learning.rfb19.g4.MySuiteListener" />
+    </listeners>
+
+
+    <parameter name="uname" value="Basil" />
+
+    <parameter name="name" value="Basil" />
+    <parameter name="sname" value="Wolf" />
+    <parameter name="login" value="BWOLF" />
+
+
+    <parameter name="page" value="site/ad/342/page" />
+
+    <test thread-count="1" verbose="0" name="Surefire test">
+
+        <classes>
+            <class name="org.andestech.learning.rfb19.g4.App2Test"/>
+            <class name="org.andestech.learning.rfb19.g4.AppTest"/>
+        </classes>
+
+    </test>
+
+</suite>
