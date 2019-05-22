@@ -3,11 +3,20 @@ package org.andestech.learning.rfb19.g4;
 
 import org.testng.Assert;
 import org.testng.ISuite;
+import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+
+
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * TestNG Unit test for simple App.
@@ -86,7 +95,30 @@ public class App2Test
         return new Object[]{"id213","Hgqyweu","p_1221_3123_222"};
     }
 
-    @Test(dataProvider = "idData")
+
+    @DataProvider(name = "idData2")
+    public static Object[] getIds2(ITestContext ctx){
+
+       // File file = new File(ctx.getCurrentXmlTest().getParameter("webElements"));
+        String filename = ctx.getCurrentXmlTest().getParameter("webElements");
+        List<String> lines = null;
+
+        try {
+            lines =Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8);
+            lines.removeIf( x -> x.startsWith("#"));
+
+            System.out.println(lines);
+        }
+        catch (IOException ex){ex.printStackTrace();}
+
+        //   Object[] arr = new Object[lines.size()];
+        //   System.out.println(iSuite.getXmlSuite().getParameter("page"));
+
+        return lines.toArray();
+    }
+
+
+    @Test(dataProvider = "idData2")
     public void elementPresenceTest(String id)
     {
         System.out.println("id: " + id);
